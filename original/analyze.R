@@ -19,3 +19,4 @@ grouped_data <- filtered_data %>%
     drought = max(drought),
     earthquake = max(earthquake)
   )
+
