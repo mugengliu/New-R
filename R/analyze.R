@@ -20,3 +20,4 @@ grouped_data <- filtered_data %>%
     earthquake = max(earthquake)
   )
 
+
