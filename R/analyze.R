@@ -1,23 +1,20 @@
 library(readr)
 library(dplyr)
 
-maternal_mortality_data <- read_csv("original/disaster.csv")
+disaster <- read.csv(here("data", "original", "disaster.csv"), header = TRUE)
 
-filtered_data <- maternal_mortality_data %>%
-  filter(Year >= 2000 & Year <= 2019, `Disaster Type` %in% c("Earthquake", "Drought")) %>% select(Year, ISO, `Disaster Type`) %>%
-  mutate(
-    drought = ifelse(`Disaster Type` == "Drought", 1, 0),
-    earthquake = ifelse(`Disaster Type` == "Earthquake", 1, 0)
-  )
+### select rows for earthquake and drought and columns for year, country, ISO, disaster type
+disaster |>
+  dplyr::filter(Year >= 2000 & Year <= 2019) |>
+  dplyr::filter(Disaster.Type %in% c("Earthquake", "Drought")) |>
+  dplyr::select(Year, ISO, Disaster.Type) |>
+  rename(year = Year) |>
+  group_by(year, ISO) |>
+  mutate(drought0 = ifelse(Disaster.Type == "Drought", 1, 0),
+         earthquake0 = ifelse(Disaster.Type == "Earthquake", 1, 0)) |>
+  summarize(drought = max(drought0),
+            earthquake = max(earthquake0)) |> 
+  ungroup() -> disasters 
 
-# View the filtered data
-head(filtered_data)
-
-grouped_data <- filtered_data %>%
-  group_by(Year, ISO) %>%
-  summarize(
-    drought = max(drought),
-    earthquake = max(earthquake)
-  )
-
+#save(disasters, file = here("data", "disasters.Rda"))
 

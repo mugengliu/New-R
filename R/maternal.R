@@ -5,29 +5,39 @@ library(purrr)
 library(countrycode)
 
 
-changeformat <- function(file, values){
-  maternalmortality_data <- read_csv(file.path("data",file))
-  subset_data <- maternalmortality_data %>%
-    select(`Country Name`, `2000`:`2019`)
-  
-  long_data <- subset_data %>%
-    pivot_longer(
-      cols = `2000`:`2019`,         # Select the columns to pivot
-      names_to = "Year",            # Name for the new "year" column
-      values_to = values          # Name for the new "values" column
-    ) %>%
-    mutate(Year = as.numeric(Year)) # Convert the "Year" column to numeric
-  return(long_data)
+matmor0 <- read.csv(here("data", "original", "maternalmortality.csv"), header = TRUE)
+infmor0 <- read.csv(here("data", "original", "infantmortality.csv"), header = TRUE)
+neomor0 <- read.csv(here("data", "original", "neonatalmorta.csv"), header = TRUE)
+un5mor0 <- read.csv(here("data", "original", "under5mortality.csv"), header = TRUE)
+
+
+### write a function that does the above manipulation to each data
+wbfun <- function(dataname, varname){
+  dataname |>
+    dplyr::select(Country.Name, X2000:X2019) |>
+    pivot_longer(cols = starts_with("X"),
+                 names_to = "year",
+                 names_prefix = "X",
+                 values_to = varname) |>
+    mutate(year = as.numeric(year)) |>
+    arrange(Country.Name, year)
 }
 
-maternal_data <- changeformat("maternalmortality.csv","MatMor")
-infant_data <- changeformat("infantmortality.csv","InfantR")
-neonatal_data <- changeformat("neonatalmorta.csv","NeonatalR")
-under5_data <- changeformat("under5mortality.csv","Under5R")
+matmor <- wbfun(dataname = matmor0, varname = "matmor")
+infmor <- wbfun(dataname = infmor0, varname = "infmor")
+neomor <- wbfun(dataname = neomor0, varname = "neomor")
+un5mor <- wbfun(dataname = un5mor0, varname = "un5mor")
 
-merge_data <- reduce(list(maternal_data, infant_data, neonatal_data, under5_data), function(x, y) full_join(x, y, by = c("Country Name", "Year")))
+#put all data frames into list
+wblist <- list(matmor, infmor, neomor, un5mor)
 
-merge_data$ISO <- countrycode(merge_data$`Country Name`,
-                            origin = "country.name",
-                            destination = "iso3c")
+#merge all data frames in list
+wblist |> reduce(full_join, by = c('Country.Name', 'year')) -> wbdata
 
+
+# add ISO-3 to data
+wbdata$ISO <- countrycode(wbdata$Country.Name, 
+                          origin = "country.name", 
+                          destination = "iso3c")
+wbdata <- wbdata |>
+  dplyr::select(-Country.Name)
