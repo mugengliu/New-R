@@ -1,16 +1,26 @@
 library(readr)
 library(dplyr)
 
-source("R/analyze.R")
-source("R/merge_diaster.R")
+covs <- read.csv(here("data", "original", "covariates.csv"), header = TRUE)
 
-head(grouped_data)
+source(here("R", "prepare_maternal.R"))
+source(here("R", "analyze.R"))
+source(here("R", "merge_diaster.R"))
 
-grouped_data <- grouped_data %>% rename(year = Year)
-head(disaster_data_binary)
+#put all data frames into list
+alllist <- list(confdata, wbdata, disasters)
 
-merged_data <- inner_join(grouped_data, disaster_data_binary, by = c("ISO", "year"))
+#merge all data frames in list
+alllist |> reduce(full_join, by = c('ISO', 'year')) -> finaldata0
 
-head(merged_data)
+finaldata <- covs |>
+  left_join(finaldata0, by = c('ISO', 'year'))
 
-write_csv(merged_data, "final_analytical_data.csv")
+# need to fill in NAs with 0's for armconf1, drought, earthquake
+finaldata <- finaldata |>
+  mutate(armconf1 = replace_na(armconf1, 0),
+         drought = replace_na(drought, 0),
+         earthquake = replace_na(earthquake, 0),
+         totdeath = replace_na(totdeath, 0))
+
+write.csv(finaldata, file = here("data", "analytical", "finaldata.csv"), row.names = FALSE)

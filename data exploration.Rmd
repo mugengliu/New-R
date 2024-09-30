@@ -1,4 +1,18 @@
+---
+title: "Exploration and Summary"
+author: "Mugeng Liu"
+date: "2024-09-30"
+output:
+  pdf_document: default
+  html_document: default
+---
 ```{r}
+install.packages("ggplot2", repos = "https://cloud.r-project.org/")
+```
+
+```{r}
+library(here)
+library(ggplot2)
 finaldata <- read.csv(here("data/analytical", "finaldata.csv"), header = TRUE)
 names(finaldata)
 ```
@@ -26,8 +40,7 @@ print("number of country missed in matmor")
 
 Missing Data: We then check the missing data in our observation. Variable Matmor has the biggest portion of data missing, about 426 in 3720 are missed, account for 186 countries in different year, which means all countries have data missing in different year. All countries missed data in 2018 and 2019, suggested a MCAR type missing data due to unable to update the data. It is noticeable that infmor, neomor, un5mor variables missed 20 observations. It is the country Puerto Rico missed these observations across the whole interval from 2000 to 2019.
 
-
-Relationship between matmor, infmor, neomor and un5mor. We also want to explore whether there's association between these variables. 
+Relationship between matmor, infmor, neomor and un5mor. We also want to explore whether there's association between these variables.
 
 ```{r}
 finaldata |>
@@ -54,6 +67,7 @@ finaldata |>
   scale_x_log10() +
   scale_y_log10()
 ```
+
 ```{r}
 finaldata |>
   ggplot(aes(x = neomor, y = un5mor, alpha = 0.1)) +
@@ -67,6 +81,7 @@ finaldata |>
 ```
 
 Relationship between gdp1000 and other variables
+
 ```{r}
 variables <- setdiff(names(finaldata), "gdp1000")
 
@@ -82,6 +97,7 @@ for (var in variables) {
 ```
 
 Next, apply the log transformation for those continous variables
+
 ```{r}
 variables <- setdiff(names(finaldata), "gdp1000")
 
@@ -103,6 +119,7 @@ for (var in numeric_variables) {
 ```
 
 We then compute the coefficient of determination to see the relation between gdp1000 and other variables
+
 ```{r}
 variables <- setdiff(names(finaldata), "gdp1000")
 numeric_variables <- variables[sapply(finaldata[variables], is.numeric)]  # Filter numeric variables only
@@ -114,7 +131,9 @@ for (var in numeric_variables) {
   print(paste("R² between gdp1000 and", var, ":", r_squared))  # Print R²
 }
 ```
+
 Since there are constant for some vairables, we use log transformation to further explore the relationship
+
 ```{r}
 # Get the variable names excluding 'gdp1000' and keeping only numeric variables
 variables <- setdiff(names(finaldata), "gdp1000")
@@ -134,7 +153,5 @@ for (var in numeric_variables) {
   print(paste("R² (log scale) between gdp1000 and", var, ":", r_squared))
 }
 ```
-Summary of relation between variables:
-1. There are very strong positive correlations on variables between matmor, infmor, neomor, un5mor.
-2. There are very strong correlations on variable gdp1000 with variables agedep, matmor, infmor, neomor, un5mor. Un5mor has the highest correlation of determination, which accounts for 0.76 in log transformation. In addition, it shows that gdp1000 and mo rate has very high negative correlation, gdp1000 also have negative correlation with variable agedep and positive correlation with male_edu.
 
+Summary of relation between variables: 1. There are very strong positive correlations on variables between matmor, infmor, neomor, un5mor. 2. There are very strong correlations on variable gdp1000 with variables agedep, matmor, infmor, neomor, un5mor. Un5mor has the highest correlation of determination, which accounts for 0.76 in log transformation. In addition, it shows that gdp1000 and mo rate has very high negative correlation, gdp1000 also have negative correlation with variable agedep and positive correlation with male_edu.

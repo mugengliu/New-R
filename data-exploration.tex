@@ -1,0 +1,856 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Exploration and Summary},
+  pdfauthor={Mugeng Liu},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Exploration and Summary}
+\author{Mugeng Liu}
+\date{2024-09-30}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\AttributeTok{repos =} \StringTok{"https://cloud.r{-}project.org/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 将程序包安装入'C:/Users/39225/AppData/Local/R/win-library/4.4'
+## (因为'lib'没有被指定)
+\end{verbatim}
+
+\begin{verbatim}
+## 程序包'ggplot2'打开成功，MD5和检查也通过
+## 
+## 下载的二进制程序包在
+##  C:\Users\39225\AppData\Local\Temp\RtmpKYLbnV\downloaded_packages里
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(here)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## here() starts at C:/Users/39225/Desktop/New-R
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\NormalTok{finaldata }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data/analytical"}\NormalTok{, }\StringTok{"finaldata.csv"}\NormalTok{), }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(finaldata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "country_name" "ISO"          "region"       "year"         "gdp1000"     
+##  [6] "OECD"         "OECD2023"     "popdens"      "urban"        "agedep"      
+## [11] "male_edu"     "temp"         "rainfall1000" "totdeath"     "armconf1"    
+## [16] "matmor"       "infmor"       "neomor"       "un5mor"       "drought"     
+## [21] "earthquake"
+\end{verbatim}
+
+First, look at the summary of variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finaldata }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  country_name           ISO               region               year     
+##  Length:3720        Length:3720        Length:3720        Min.   :2000  
+##  Class :character   Class :character   Class :character   1st Qu.:2005  
+##  Mode  :character   Mode  :character   Mode  :character   Median :2010  
+##                                                           Mean   :2010  
+##                                                           3rd Qu.:2014  
+##                                                           Max.   :2019  
+##                                                                         
+##     gdp1000              OECD          OECD2023         popdens     
+##  Min.   :  0.1105   Min.   :0.000   Min.   :0.0000   Min.   : 0.00  
+##  1st Qu.:  1.2383   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:14.79  
+##  Median :  4.0719   Median :0.000   Median :0.0000   Median :27.52  
+##  Mean   : 11.4917   Mean   :0.171   Mean   :0.1882   Mean   :30.57  
+##  3rd Qu.: 13.1531   3rd Qu.:0.000   3rd Qu.:0.0000   3rd Qu.:40.72  
+##  Max.   :123.6787   Max.   :1.000   Max.   :1.0000   Max.   :99.86  
+##  NA's   :62                                          NA's   :20     
+##      urban             agedep          male_edu           temp       
+##  Min.   : 0.1025   Min.   : 16.17   Min.   : 1.067   Min.   :-2.405  
+##  1st Qu.:17.2872   1st Qu.: 47.94   1st Qu.: 5.904   1st Qu.:12.928  
+##  Median :30.2535   Median : 55.51   Median : 8.368   Median :21.958  
+##  Mean   :30.6948   Mean   : 61.94   Mean   : 8.258   Mean   :19.625  
+##  3rd Qu.:41.6558   3rd Qu.: 77.11   3rd Qu.:10.849   3rd Qu.:25.869  
+##  Max.   :93.4135   Max.   :111.48   Max.   :14.441   Max.   :29.676  
+##  NA's   :20                         NA's   :20       NA's   :20      
+##   rainfall1000        totdeath          armconf1          matmor      
+##  Min.   :0.01993   Min.   :    0.0   Min.   :0.0000   Min.   :   2.0  
+##  1st Qu.:0.59146   1st Qu.:    0.0   1st Qu.:0.0000   1st Qu.:  17.0  
+##  Median :1.01288   Median :    0.0   Median :0.0000   Median :  66.0  
+##  Mean   :1.20216   Mean   :  334.6   Mean   :0.1788   Mean   : 210.6  
+##  3rd Qu.:1.68706   3rd Qu.:    1.0   3rd Qu.:0.0000   3rd Qu.: 299.8  
+##  Max.   :4.71081   Max.   :78644.0   Max.   :1.0000   Max.   :2480.0  
+##  NA's   :20                                           NA's   :426     
+##      infmor           neomor          un5mor          drought       
+##  Min.   :  1.60   Min.   : 0.80   Min.   :  2.00   Min.   :0.00000  
+##  1st Qu.:  7.60   1st Qu.: 4.90   1st Qu.:  9.00   1st Qu.:0.00000  
+##  Median : 18.90   Median :12.10   Median : 22.20   Median :0.00000  
+##  Mean   : 28.90   Mean   :16.18   Mean   : 40.50   Mean   :0.08737  
+##  3rd Qu.: 44.52   3rd Qu.:25.32   3rd Qu.: 61.33   3rd Qu.:0.00000  
+##  Max.   :138.10   Max.   :60.90   Max.   :224.90   Max.   :1.00000  
+##  NA's   :20       NA's   :20      NA's   :20                        
+##    earthquake     
+##  Min.   :0.00000  
+##  1st Qu.:0.00000  
+##  Median :0.00000  
+##  Mean   :0.08333  
+##  3rd Qu.:0.00000  
+##  Max.   :1.00000  
+## 
+\end{verbatim}
+
+General Statistics: The observations are from 186 countries and across
+20 years, which means total of 3720 data. We see a very large right
+skewed distribution in the variable gdp1000, totdeat, matmor, infmor,
+un5mor. Only temp, male\_edu is left skewed. This shows that countries
+not only have large variation, but also few countries have better
+condition. The Max in gdp1000 is 123,6787 whereas median is 4.0719 and
+mean is 11.4917.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rows\_u }\OtherTok{\textless{}{-}}\NormalTok{ finaldata[}\FunctionTok{is.na}\NormalTok{(finaldata}\SpecialCharTok{$}\NormalTok{matmor), }\FunctionTok{c}\NormalTok{(}\StringTok{"country\_name"}\NormalTok{, }\StringTok{"year"}\NormalTok{)]}
+
+\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(rows\_u}\SpecialCharTok{$}\NormalTok{country\_name))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 186
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"number of country missed in matmor"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "number of country missed in matmor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rows\_um }\OtherTok{\textless{}{-}}\NormalTok{ finaldata[}\FunctionTok{is.na}\NormalTok{(finaldata}\SpecialCharTok{$}\NormalTok{neomor), }\FunctionTok{c}\NormalTok{(}\StringTok{"country\_name"}\NormalTok{, }\StringTok{"year"}\NormalTok{)]}
+\NormalTok{rows\_um}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      country_name year
+## 2621  Puerto Rico 2000
+## 2622  Puerto Rico 2001
+## 2623  Puerto Rico 2002
+## 2624  Puerto Rico 2003
+## 2625  Puerto Rico 2004
+## 2626  Puerto Rico 2005
+## 2627  Puerto Rico 2006
+## 2628  Puerto Rico 2007
+## 2629  Puerto Rico 2008
+## 2630  Puerto Rico 2009
+## 2631  Puerto Rico 2010
+## 2632  Puerto Rico 2011
+## 2633  Puerto Rico 2012
+## 2634  Puerto Rico 2013
+## 2635  Puerto Rico 2014
+## 2636  Puerto Rico 2015
+## 2637  Puerto Rico 2016
+## 2638  Puerto Rico 2017
+## 2639  Puerto Rico 2018
+## 2640  Puerto Rico 2019
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"number of country missed in matmor"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "number of country missed in matmor"
+\end{verbatim}
+
+Missing Data: We then check the missing data in our observation.
+Variable Matmor has the biggest portion of data missing, about 426 in
+3720 are missed, account for 186 countries in different year, which
+means all countries have data missing in different year. All countries
+missed data in 2018 and 2019, suggested a MCAR type missing data due to
+unable to update the data. It is noticeable that infmor, neomor, un5mor
+variables missed 20 observations. It is the country Puerto Rico missed
+these observations across the whole interval from 2000 to 2019.
+
+Relationship between matmor, infmor, neomor and un5mor. We also want to
+explore whether there's association between these variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finaldata }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ matmor, }\AttributeTok{y =}\NormalTok{ infmor, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 444 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finaldata }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ matmor, }\AttributeTok{y =}\NormalTok{ infmor, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_log10}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 444 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finaldata }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ infmor, }\AttributeTok{y =}\NormalTok{ neomor, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 20 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finaldata }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ infmor, }\AttributeTok{y =}\NormalTok{ neomor, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_log10}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 20 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-6-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finaldata }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ neomor, }\AttributeTok{y =}\NormalTok{ un5mor, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 20 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finaldata }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ neomor, }\AttributeTok{y =}\NormalTok{ un5mor, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_log10}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 20 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+Relationship between gdp1000 and other variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variables }\OtherTok{\textless{}{-}} \FunctionTok{setdiff}\NormalTok{(}\FunctionTok{names}\NormalTok{(finaldata), }\StringTok{"gdp1000"}\NormalTok{)}
+
+\CommentTok{\# Create 23 ggplot graphs}
+\ControlFlowTok{for}\NormalTok{ (var }\ControlFlowTok{in}\NormalTok{ variables) \{}
+\NormalTok{  p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(finaldata, }\FunctionTok{aes\_string}\NormalTok{(}\AttributeTok{x =} \StringTok{"gdp1000"}\NormalTok{, }\AttributeTok{y =}\NormalTok{ var)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \FunctionTok{paste}\NormalTok{(}\StringTok{"gdp1000 vs"}\NormalTok{, var), }\AttributeTok{x =} \StringTok{"gdp1000"}\NormalTok{, }\AttributeTok{y =}\NormalTok{ var)}
+
+  \CommentTok{\# Print the plot}
+  \FunctionTok{print}\NormalTok{(p)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+## i Please use tidy evaluation idioms with `aes()`.
+## i See also `vignette("ggplot2-in-packages")` for more information.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-3.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-4.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-5.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-6.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-7.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-8.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-9.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-10.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-11.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-12.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-13.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-14.pdf}
+
+\begin{verbatim}
+## Warning: Removed 479 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-15.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-16.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-17.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-18.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-19.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-8-20.pdf}
+
+Next, apply the log transformation for those continous variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variables }\OtherTok{\textless{}{-}} \FunctionTok{setdiff}\NormalTok{(}\FunctionTok{names}\NormalTok{(finaldata), }\StringTok{"gdp1000"}\NormalTok{)}
+
+\CommentTok{\# Create 23 ggplot graphs with log scales}
+\NormalTok{variables }\OtherTok{\textless{}{-}} \FunctionTok{setdiff}\NormalTok{(}\FunctionTok{names}\NormalTok{(finaldata), }\StringTok{"gdp1000"}\NormalTok{)}
+\NormalTok{numeric\_variables }\OtherTok{\textless{}{-}}\NormalTok{ variables[}\FunctionTok{sapply}\NormalTok{(finaldata[variables], is.numeric)]  }\CommentTok{\# Filter numeric variables only}
+
+\CommentTok{\# Create ggplot graphs with log scales for numeric variables}
+\ControlFlowTok{for}\NormalTok{ (var }\ControlFlowTok{in}\NormalTok{ numeric\_variables) \{}
+\NormalTok{  p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(finaldata, }\FunctionTok{aes\_string}\NormalTok{(}\AttributeTok{x =} \StringTok{"gdp1000"}\NormalTok{, }\AttributeTok{y =}\NormalTok{ var)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# Apply log scale to the x{-}axis}
+    \FunctionTok{scale\_y\_log10}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# Apply log scale to the y{-}axis}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \FunctionTok{paste}\NormalTok{(}\StringTok{"gdp1000 (log scale) vs"}\NormalTok{, var), }\AttributeTok{x =} \StringTok{"gdp1000 (log scale)"}\NormalTok{, }\AttributeTok{y =} \FunctionTok{paste}\NormalTok{(var, }\StringTok{"(log scale)"}\NormalTok{))}
+
+  \CommentTok{\# Print the plot}
+  \FunctionTok{print}\NormalTok{(p)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+## Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+## Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-3.pdf}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-4.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-5.pdf}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-6.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-7.pdf}
+
+\begin{verbatim}
+## Warning in transformation$transform(x): 产生了NaNs
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 97 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-8.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-9.pdf}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-10.pdf}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+## Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-11.pdf}
+
+\begin{verbatim}
+## Warning: Removed 479 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-12.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-13.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-14.pdf}
+
+\begin{verbatim}
+## Warning: Removed 82 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-15.pdf}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+## Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-16.pdf}
+
+\begin{verbatim}
+## Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+## Removed 62 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{data-exploration_files/figure-latex/unnamed-chunk-9-17.pdf}
+
+We then compute the coefficient of determination to see the relation
+between gdp1000 and other variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variables }\OtherTok{\textless{}{-}} \FunctionTok{setdiff}\NormalTok{(}\FunctionTok{names}\NormalTok{(finaldata), }\StringTok{"gdp1000"}\NormalTok{)}
+\NormalTok{numeric\_variables }\OtherTok{\textless{}{-}}\NormalTok{ variables[}\FunctionTok{sapply}\NormalTok{(finaldata[variables], is.numeric)]  }\CommentTok{\# Filter numeric variables only}
+
+\CommentTok{\# Calculate and print the coefficient of determination (R²)}
+\ControlFlowTok{for}\NormalTok{ (var }\ControlFlowTok{in}\NormalTok{ numeric\_variables) \{}
+\NormalTok{  correlation }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(finaldata}\SpecialCharTok{$}\NormalTok{gdp1000, finaldata[[var]], }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)  }\CommentTok{\# Calculate correlation}
+\NormalTok{  r\_squared }\OtherTok{\textless{}{-}}\NormalTok{ correlation}\SpecialCharTok{\^{}}\DecValTok{2}  \CommentTok{\# Coefficient of determination (R²)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"R² between gdp1000 and"}\NormalTok{, var, }\StringTok{":"}\NormalTok{, r\_squared))  }\CommentTok{\# Print R²}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "R² between gdp1000 and year : 0.0199193495318992"
+## [1] "R² between gdp1000 and OECD : 0.451673709351956"
+## [1] "R² between gdp1000 and OECD2023 : 0.418419054094762"
+## [1] "R² between gdp1000 and popdens : 0.0772586747097375"
+## [1] "R² between gdp1000 and urban : 0.12801902865117"
+## [1] "R² between gdp1000 and agedep : 0.212760586301231"
+## [1] "R² between gdp1000 and male_edu : 0.342209469897449"
+## [1] "R² between gdp1000 and temp : 0.148847329237021"
+## [1] "R² between gdp1000 and rainfall1000 : 0.0166305915062702"
+## [1] "R² between gdp1000 and totdeath : 0.00411169239674023"
+## [1] "R² between gdp1000 and armconf1 : 0.0472605074972065"
+## [1] "R² between gdp1000 and matmor : 0.141625543257321"
+## [1] "R² between gdp1000 and infmor : 0.250976490885132"
+## [1] "R² between gdp1000 and neomor : 0.296189509533123"
+## [1] "R² between gdp1000 and un5mor : 0.209436855921416"
+## [1] "R² between gdp1000 and drought : 0.0124025137355979"
+## [1] "R² between gdp1000 and earthquake : 0.00240443473018854"
+\end{verbatim}
+
+Since there are constant for some vairables, we use log transformation
+to further explore the relationship
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Get the variable names excluding \textquotesingle{}gdp1000\textquotesingle{} and keeping only numeric variables}
+\NormalTok{variables }\OtherTok{\textless{}{-}} \FunctionTok{setdiff}\NormalTok{(}\FunctionTok{names}\NormalTok{(finaldata), }\StringTok{"gdp1000"}\NormalTok{)}
+\NormalTok{numeric\_variables }\OtherTok{\textless{}{-}}\NormalTok{ variables[}\FunctionTok{sapply}\NormalTok{(finaldata[variables], is.numeric)]  }\CommentTok{\# Filter numeric variables only}
+
+\CommentTok{\# Calculate and print the coefficient of determination (R²) using log scale}
+\ControlFlowTok{for}\NormalTok{ (var }\ControlFlowTok{in}\NormalTok{ numeric\_variables) \{}
+  \CommentTok{\# Take the log of both gdp1000 and the variable, and handle non{-}positive values by removing them}
+\NormalTok{  log\_gdp1000 }\OtherTok{\textless{}{-}} \FunctionTok{log10}\NormalTok{(finaldata}\SpecialCharTok{$}\NormalTok{gdp1000[finaldata}\SpecialCharTok{$}\NormalTok{gdp1000 }\SpecialCharTok{\textgreater{}} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ finaldata[[var]] }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{])}
+\NormalTok{  log\_var }\OtherTok{\textless{}{-}} \FunctionTok{log10}\NormalTok{(finaldata[[var]][finaldata}\SpecialCharTok{$}\NormalTok{gdp1000 }\SpecialCharTok{\textgreater{}} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ finaldata[[var]] }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{])}
+  
+  \CommentTok{\# Calculate correlation on the log{-}transformed values}
+\NormalTok{  correlation }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(log\_gdp1000, log\_var, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)  }
+\NormalTok{  r\_squared }\OtherTok{\textless{}{-}}\NormalTok{ correlation}\SpecialCharTok{\^{}}\DecValTok{2}  \CommentTok{\# Coefficient of determination (R²)}
+  
+  \CommentTok{\# Print the result}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"R² (log scale) between gdp1000 and"}\NormalTok{, var, }\StringTok{":"}\NormalTok{, r\_squared))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "R² (log scale) between gdp1000 and year : 0.0495986512139431"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in cor(log_gdp1000, log_var, use = "complete.obs"): 标准差为零
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "R² (log scale) between gdp1000 and OECD : NA"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in cor(log_gdp1000, log_var, use = "complete.obs"): 标准差为零
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "R² (log scale) between gdp1000 and OECD2023 : NA"
+## [1] "R² (log scale) between gdp1000 and popdens : 0.0835977372685305"
+## [1] "R² (log scale) between gdp1000 and urban : 0.0576944203381457"
+## [1] "R² (log scale) between gdp1000 and agedep : 0.522968817855496"
+## [1] "R² (log scale) between gdp1000 and male_edu : 0.512340224531013"
+## [1] "R² (log scale) between gdp1000 and temp : 0.165397366304325"
+## [1] "R² (log scale) between gdp1000 and rainfall1000 : 0.0164346680207383"
+## [1] "R² (log scale) between gdp1000 and totdeath : 0.0505476432045135"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in cor(log_gdp1000, log_var, use = "complete.obs"): 标准差为零
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "R² (log scale) between gdp1000 and armconf1 : NA"
+## [1] "R² (log scale) between gdp1000 and matmor : 0.687840867866204"
+## [1] "R² (log scale) between gdp1000 and infmor : 0.758574804183902"
+## [1] "R² (log scale) between gdp1000 and neomor : 0.736345858821845"
+## [1] "R² (log scale) between gdp1000 and un5mor : 0.760652489893813"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in cor(log_gdp1000, log_var, use = "complete.obs"): 标准差为零
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "R² (log scale) between gdp1000 and drought : NA"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in cor(log_gdp1000, log_var, use = "complete.obs"): 标准差为零
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "R² (log scale) between gdp1000 and earthquake : NA"
+\end{verbatim}
+
+Summary of relation between variables: 1. There are very strong positive
+correlations on variables between matmor, infmor, neomor, un5mor. 2.
+There are very strong correlations on variable gdp1000 with variables
+agedep, matmor, infmor, neomor, un5mor. Un5mor has the highest
+correlation of determination, which accounts for 0.76 in log
+transformation. In addition, it shows that gdp1000 and mo rate has very
+high negative correlation, gdp1000 also have negative correlation with
+variable agedep and positive correlation with male\_edu.
+
+\end{document}
