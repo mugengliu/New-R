@@ -1,0 +1,87 @@
+---
+title: "Your Document Title"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+```{r}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
+
+```{r}
+library(here)
+library(ggplot2)
+library(table1)
+finaldata <- read.csv(here("data/analytical", "finaldata.csv"), header = TRUE)
+names(finaldata)
+```
+
+First, generate the conflict data
+
+```{r}
+label(finaldata$armconf1) <- "Armed Conflict happened in that year"
+label(finaldata$gdp1000) <- "GDP in thousands"
+label(finaldata$matmor) <- "Maternal mortality ratio per 100000 live births"
+label(finaldata$un5mor) <- "Under-5 mortality rate per 1000 live births"
+label(finaldata$infmor) <- "Infant mortality rate per 1000 live births"
+label(finaldata$neomor) <- "Neonatal mortality rate per 1000 live births"
+
+finaldata$armconf1 <- factor(finaldata$armconf1, levels = c(0, 1), labels = c('No Exposure to Conflicts','Exposure to Conflicts'))
+
+
+table1(~ gdp1000 + matmor + un5mor + infmor +neomor | armconf1, 
+       data = finaldata)
+
+```
+
+```{r}
+library(ggplot2)
+finaldata <- read.csv(here("data/analytical", "finaldata.csv"), header = TRUE)
+# Convert armconf1 to a factor with appropriate labels
+finaldata$armconf1 <- factor(finaldata$armconf1, levels = c(0, 1), labels = c("No Conflict", "Conflict"))
+
+ggplot(finaldata, aes(x = year, y = matmor, color = armconf1)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(aes(group = armconf1), method = "loess", se = FALSE) +
+  scale_color_manual(values = c("blue", "green")) +
+  labs(title = "Maternal Mortality Ratio per100000 Over Years",
+       x = "Year",
+       y = "Maternal Mortality Ratio Per 100000",
+       color = "Conflict Status") +
+  theme_minimal()
+```
+
+```{r}
+library(ggplot2)
+finaldata <- read.csv(here("data/analytical", "finaldata.csv"), header = TRUE)
+# Convert armconf1 to a factor with appropriate labels
+finaldata$armconf1 <- factor(finaldata$armconf1, levels = c(0, 1), labels = c("No Conflict", "Conflict"))
+
+ggplot(finaldata, aes(x = year, y = un5mor, color = armconf1)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(aes(group = armconf1), method = "loess", se = FALSE) +
+  scale_color_manual(values = c("blue", "green")) +
+  labs(title = "Under5 Mortality Ratio In 1000 Over Years",
+       x = "Year",
+       y = "Under5 Mortality Ratio Per 1000",
+       color = "Conflict Status") +
+  theme_minimal()
+```
+
+```{r}
+library(ggplot2)
+finaldata <- read.csv(here("data/analytical", "finaldata.csv"), header = TRUE)
+# Convert armconf1 to a factor with appropriate labels
+finaldata$armconf1 <- factor(finaldata$armconf1, levels = c(0, 1), labels = c("No Conflict", "Conflict"))
+
+ggplot(finaldata, aes(x = year, y = gdp1000, color = armconf1)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(aes(group = armconf1), method = "loess", se = FALSE) +
+  scale_color_manual(values = c("blue", "green")) +
+  labs(title = "gdp1000 Over Years",
+       x = "Year",
+       y = "gdp in a thousand",
+       color = "Conflict Status") +
+  theme_minimal()
+```
+
